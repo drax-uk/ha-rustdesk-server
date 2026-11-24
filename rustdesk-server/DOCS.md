@@ -7,7 +7,7 @@ version: `1.1.16-1` runs RustDesk Server 1.1.16.
 ## Options
 
 | Option | Description |
-|---|---|
+| --- | --- |
 | `relay_host` | Public hostname or IP (optionally `:port`) of your relay, e.g. `rustdesk.example.com`. Leave empty on a LAN-only setup. |
 | `always_use_relay` | Force all connections through the relay (disables P2P). |
 | `encrypted_only` | Reject clients that don't use this server's key. Turn on once every client has the key. |
@@ -20,7 +20,7 @@ The app uses host networking. Make sure nothing else on the host uses these
 ports, and forward them on your router for access from outside your home:
 
 | Port | Protocol | Used by |
-|---|---|---|
+| --- | --- | --- |
 | 21115 | TCP | hbbs – NAT type test |
 | 21116 | TCP + **UDP** | hbbs – ID registration / hole punching |
 | 21117 | TCP | hbbr – relay |

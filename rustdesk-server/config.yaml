@@ -11,8 +11,6 @@ arch:
   - amd64
 init: false
 startup: services
-boot: auto
-backup: hot
 # Host networking is needed for RustDesk P2P (direct) connections.
 host_network: true
 map:
