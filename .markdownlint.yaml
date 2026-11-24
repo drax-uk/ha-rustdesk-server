@@ -1,0 +1,4 @@
+---
+# Long table rows are fine; wrap normal text at 80 characters.
+MD013:
+  tables: false
