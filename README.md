@@ -41,7 +41,9 @@ that project. Thank you!
 
 RustDesk and RustDesk Server are made by the [RustDesk team][rustdesk]
 (AGPL-3.0). The RustDesk name and logo belong to them; this project is not
-affiliated with or endorsed by RustDesk.
+affiliated with or endorsed by RustDesk. The app icon and logo are taken from
+the official [RustDesk repository][rustdesk-res] (`res/icon.png`, and
+`res/logo-header.svg` rendered to PNG).
 
 ## License
 
@@ -52,6 +54,7 @@ MIT – see [LICENSE](LICENSE).
 [releases]: https://github.com/drax-uk/ha-rustdesk-server/releases
 [releases-shield]: https://img.shields.io/github/v/release/drax-uk/ha-rustdesk-server
 [rustdesk]: https://github.com/rustdesk/rustdesk
+[rustdesk-res]: https://github.com/rustdesk/rustdesk/tree/master/res
 [rustdesk-server]: https://github.com/rustdesk/rustdesk-server
 [upstream-app]: https://github.com/SankeerthBoddu/ha-rustdesk-server
 [upstream-author]: https://github.com/SankeerthBoddu

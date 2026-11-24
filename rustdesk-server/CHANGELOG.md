@@ -23,7 +23,7 @@ Runs **RustDesk Server 1.1.16**.
 - New options `private_key` / `public_key`: bring an existing keypair into a
   fresh install (e.g. when moving to the GitHub-installed app).
 - Friendly option and port names in the Home Assistant UI.
-- App icon and logo.
+- App icon and logo (official RustDesk artwork from rustdesk/rustdesk).
 - Only `amd64` is supported (aarch64/armv7 removed).
 
 Existing options (`relay_host`, `always_use_relay`, `log_level`) are unchanged.
