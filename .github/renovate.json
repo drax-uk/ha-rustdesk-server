@@ -1,0 +1,60 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    ":dependencyDashboard"
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
+        "//Dockerfile$/"
+      ],
+      "matchStringsStrategy": "any",
+      "matchStrings": [
+        "ARG BUILD_FROM=(?<depName>.*?):(?<currentValue>.*?)\\s+"
+      ],
+      "datasourceTemplate": "docker"
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
+        "//Dockerfile$/"
+      ],
+      "matchStrings": [
+        "ARG RUSTDESK_SERVER_VERSION=(?<currentValue>.+?)\\s+"
+      ],
+      "datasourceTemplate": "github-releases",
+      "depNameTemplate": "rustdesk/rustdesk-server",
+      "versioningTemplate": "loose"
+    }
+  ],
+  "packageRules": [
+    {
+      "matchManagers": [
+        "github-actions"
+      ],
+      "commitMessagePrefix": "chore(deps):"
+    },
+    {
+      "matchDatasources": [
+        "docker"
+      ],
+      "commitMessagePrefix": "⬆️",
+      "commitMessageTopic": "Home Assistant base image"
+    },
+    {
+      "matchDatasources": [
+        "github-releases"
+      ],
+      "matchDepNames": [
+        "rustdesk/rustdesk-server"
+      ],
+      "commitMessagePrefix": "✨",
+      "commitMessageTopic": "RustDesk Server",
+      "prBodyNotes": [
+        "After a RustDesk version bump, update RUSTDESK_SERVER_SHA256_AMD64 from the upstream GitHub release asset digest, bump the app version in config.yaml to <rustdesk>-1 and add a CHANGELOG entry. CI fails until these match."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+---
+categories:
+  - title: "Breaking changes"
+    labels:
+      - "breaking"
+  - title: "New features"
+    labels:
+      - "feature"
+      - "enhancement"
+  - title: "Bug fixes"
+    labels:
+      - "fix"
+      - "bug"
+  - title: "Maintenance"
+    labels:
+      - "chore"
+      - "dependencies"
+      - "refactor"
+  - title: "Documentation"
+    labels:
+      - "documentation"
+change-template: "- $TITLE @$AUTHOR (#$NUMBER)"
+template: |
+  ## Changes
+
+  $CHANGES

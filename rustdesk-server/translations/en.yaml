@@ -1,0 +1,38 @@
+---
+configuration:
+  relay_host:
+    name: Relay server(s)
+    description: >-
+      Public hostname or IP of the relay (usually this Home Assistant host),
+      e.g. rustdesk.example.com. Separate several with commas and append
+      :port if you don't use the default 21117. Leave empty on a LAN-only setup.
+  always_use_relay:
+    name: Always use relay
+    description: >-
+      Send every connection through the relay and disable direct (P2P)
+      connections.
+  encrypted_only:
+    name: Encrypted clients only
+    description: >-
+      Reject clients that are not configured with this server's key
+      (passes -k _ to hbbs and hbbr). Recommended once every client has the key.
+  log_level:
+    name: Log level
+    description: How much detail hbbs and hbbr write to the log.
+  private_key:
+    name: Private key
+    description: >-
+      Base64-encoded Ed25519 private key, to bring an existing key into a new
+      install. Leave empty to keep or generate the key in the app folder.
+  public_key:
+    name: Public key
+    description: >-
+      Base64-encoded Ed25519 public key matching the private key. Must be
+      provided together with the private key.
+network:
+  "21115/tcp": hbbs - NAT type test and online status query (required)
+  "21116/tcp": hbbs - TCP hole punching and connection service (required)
+  "21116/udp": hbbs - ID registration and heartbeat service (required)
+  "21117/tcp": hbbr - Relay service (required)
+  "21118/tcp": hbbs - RustDesk Web Client support (optional)
+  "21119/tcp": hbbr - RustDesk Web Client support (optional)

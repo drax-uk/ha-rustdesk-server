@@ -1,0 +1,51 @@
+#!/command/with-contenv bashio
+# shellcheck shell=bash
+# ==============================================================================
+# Home Assistant App: RustDesk Server
+# Runs the hbbs (ID / rendezvous) service
+# ==============================================================================
+
+declare relay
+declare -a params
+
+cd /config || bashio::exit.nok "Could not change working directory to /config"
+
+RUST_LOG="$(bashio::config 'log_level')"
+export RUST_LOG
+
+params=()
+
+# Encrypted-only mode: reject clients that don't use the server's key.
+if bashio::config.true 'encrypted_only'; then
+    bashio::log.info "Encrypted-only mode is enabled (-k _)"
+    params+=(-k "_")
+fi
+
+# Relay server(s) advertised to clients.
+if bashio::config.has_value 'relay_host'; then
+    relay=$(bashio::config 'relay_host')
+    bashio::log.info "Relay advertised to clients: ${relay}"
+    params+=(-r "${relay}")
+fi
+
+if bashio::config.true 'always_use_relay'; then
+    bashio::log.info "Always-use-relay is ON (P2P disabled)"
+    export ALWAYS_USE_RELAY=Y
+fi
+
+# Print the public key once it exists (hbbs creates it on first start).
+(
+    for _ in $(seq 1 30); do
+        if [ -s /config/id_ed25519.pub ]; then
+            bashio::log.info "-------------------------------------------------"
+            bashio::log.info "Public key (paste into the RustDesk client 'Key' field):"
+            bashio::log.info "$(cat /config/id_ed25519.pub)"
+            bashio::log.info "-------------------------------------------------"
+            exit 0
+        fi
+        sleep 1
+    done
+) &
+
+bashio::log.info "Starting hbbs: $(/opt/rustdesk-server/hbbs --version)"
+exec /opt/rustdesk-server/hbbs "${params[@]}"

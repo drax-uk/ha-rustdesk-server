@@ -1,0 +1,8 @@
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+
+# Private working notes (contain the home setup) – keep them out of the public repo
+CLAUDE.md
+TODO.md

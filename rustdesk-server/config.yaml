@@ -1,0 +1,51 @@
+---
+name: RustDesk Server
+version: "1.1.16-1"
+# Keep this slug: it matches the app already installed, so updates are in place.
+slug: rustdesk_server
+description: >-
+  RustDesk Server 1.1.16 (hbbs + hbbr) – self-hosted ID and relay server
+  for your own RustDesk remote desktop.
+url: https://github.com/drax-uk/ha-rustdesk-server
+arch:
+  - amd64
+init: false
+startup: services
+boot: auto
+backup: hot
+# Host networking is needed for RustDesk P2P (direct) connections.
+host_network: true
+map:
+  - type: app_config
+    read_only: false
+ports:
+  "21115/tcp": 21115
+  "21116/tcp": 21116
+  "21116/udp": 21116
+  "21117/tcp": 21117
+  "21118/tcp": 21118
+  "21119/tcp": 21119
+ports_description:
+  "21115/tcp": hbbs - NAT type test and online status query
+  "21116/tcp": hbbs - TCP hole punching and connection service
+  "21116/udp": hbbs - ID registration and heartbeat service
+  "21117/tcp": hbbr - Relay service
+  "21118/tcp": hbbs - Web client support (optional)
+  "21119/tcp": hbbr - Web client support (optional)
+options:
+  relay_host: ""
+  always_use_relay: false
+  encrypted_only: false
+  log_level: info
+  private_key: ""
+  public_key: ""
+schema:
+  relay_host: str?
+  always_use_relay: bool
+  encrypted_only: bool
+  log_level: list(trace|debug|info|warn|error)
+  private_key: password?
+  public_key: str?
+# Uncomment once the first GitHub release has published the image to GHCR.
+# Until then Home Assistant builds the image locally from the Dockerfile.
+# image: ghcr.io/drax-uk/ha-rustdesk-server
